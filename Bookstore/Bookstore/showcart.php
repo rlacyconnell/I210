@@ -30,8 +30,39 @@ $cart = $_SESSION['cart'];
 
         <?php
 		//add code to display the shopping cart content
-        
+        $sql = "SELECT id, title, price FROM books WHERE 0 ";
+        foreach(array_keys($cart) as $id) {
+            $sql .= " OR id=$id";
+        }
+
+        $query = $conn->query($sql);
+        while($row = $query->fetch_assoc()) {
+            $id = $row['id'];
+            $title = $row['title'];
+            $price = $row['price'];
+            $qty = $cart[$id];
+            $subtotal = $qty * $price;
         ?>
+          <div class="row">
+              <div class="col1">
+                  <a href = "bookdetails.php?id=<? $id ?>">
+                      <?= $title ?>
+                  </a>
+              </div>
+              <div class="col2">
+                  <?= $price ?>
+              </div>
+              <div class="col2">
+                  <?=$qty ?>
+              </div>
+              <div class="col4">
+                  <?php
+                  printf("$%.2f", $subtotal);
+                  ?>
+              </div>
+          </div>
+
+         <?php } ?>
     </div>
 
     <div class="bookstore-button">

@@ -43,3 +43,16 @@ $image = $conn->real_escape_string(trim(filter_input(INPUT_POST, 'image', FILTER
 $description = $conn->real_escape_string(trim(filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING)));
 
 //add your code below
+$sql = "UPDATE $tblBook SET title = '$title', isbn = '$isbn', author = '$author', publish_date = '$publish_date', publisher ='$publisher', price = '$price', image = '$image', description = '$description', category_id = '$category_id' WHERE id='$id'";
+
+$query = $conn->query($sql);
+if (!$query) {
+    $error = "Update failed: $conn->error";
+    $conn->close();
+    header("Location: error.php?m=$error");
+    exit;
+}
+
+$conn->close();
+header("Location: bookdetails.php?id=$id&m=update");
+

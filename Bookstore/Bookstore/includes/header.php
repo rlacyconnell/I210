@@ -1,5 +1,34 @@
 <?php
 require_once 'console_php.php';
+$bgcolor = "";
+if (isset($_GET['bgcolor'])) {
+    $bgcolor = $_GET['bgcolor'];
+    setcookie("bgcolor", $bgcolor, time() + 60 );
+} else {
+    if (isset($_COOKIE['bgcolor']))
+        $bgcolor = $_COOKIE["bgcolor"];
+}
+
+if(session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+//number of copies
+$count = '0';
+
+//retrieve shopping cart content
+if(isset($_SESSION['cart'])) {
+    $cart = $_SESSION['cart'];
+
+    $count = "";
+    if($cart) {
+        $count = array_sum($cart);
+    }
+}
+
+//set shopping cart image
+$shoppingcart_img = ($count == 0) ? "shoppingcart_empty.gif" : "shoppingcart_full.gif";
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -8,7 +37,7 @@ require_once 'console_php.php';
         <link type="text/css" rel="stylesheet" href="www/css/bookstorestyle.css" />
         <title><?php echo $page_title; ?></title>
     </head>
-    <body>
+    <body style="background-color: <?=$bgcolor ?>">
         <div id="wrapper">
             <div id="curdate">
                 <?php
@@ -35,9 +64,9 @@ require_once 'console_php.php';
                     <div id="subtitle">Learn how to build an online bookstore <br>with PHP and MySQL</div>
                 </div>
                 <div class="shoppingcart">
-                    <a href="#">
-                        <img src='www/img/shoppingcart_full.gif' alt='Shopping cart' style='width: 50px; border: none'><br>
-                        3 item(s)
+                    <a href="showcart.php">
+                        <img src='www/img/<?=$shoppingcart_img?>' alt='Shopping cart' style='width: 50px; border: none'><br>
+                        <?= $count ?>
                     </a>
                 </div>
             </div>

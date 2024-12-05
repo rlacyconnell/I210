@@ -70,7 +70,31 @@ if(!$row) {
             <div><?= $row['price']?></div>
             <div><?= $row['description']?></div>
         </div>
+
+        <div>
+            <a href="addtocart.php?id=<?= $id ?>">
+                <img src="www/img/addtocart_button.png" alt="">
+            </a>
+        </div>
     </div>
+
+ <?php
+    $confirm = "";
+    if(isset($_GET['m'])) {
+        if($_GET['m'] == "insert") {
+            $confirm = "You have succesfully added the new book.";
+        } else if($_GET['m'] == "update") {
+             $confirm = "Your book has been successfully updated.";
+            }
+
+    }
+ ?>
+ <div class="bookstore-button">
+     <div style="color:red; display: inline-block;"><?= $confirm ?></div>
+     <input type="button" onclick="window.location.href='listbooks.php'" value="List Book">
+     <input type="button" onclick="window.location.href='editbook.php?id=<?= $id ?>'" value="Edit Book">
+     <input type="button" onclick="window.location.href='deletebook.php?id=<?= $id ?>'" value="Delete Book">
+ </div>
 
 <?php
 require_once ('includes/footer.php');

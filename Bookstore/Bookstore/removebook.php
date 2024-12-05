@@ -22,3 +22,18 @@ if (!filter_has_var(INPUT_GET, 'id')) {
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
 //add your code here
+$sql = "DELETE FROM $tblBook WHERE id=$id";
+
+$query = $conn->query($sql);
+
+if (!$query) {
+    $error = "Deletion failed: $conn->error";
+    $conn->close();
+    header("Location: error.php?m=$error");
+    exit;
+}
+
+echo "<p>The book has been successfully removed from the database.</p>";
+$conn->close();
+
+require_once 'includes/footer.php';

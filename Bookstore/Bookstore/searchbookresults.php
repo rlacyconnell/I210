@@ -59,7 +59,7 @@ if(!$query) {
 
             ?>
             <div class = "row">
-                <div class = "col1"><a href="bookdetails.php?id=<?= $row['id'] ?>"><?=$row['title'] ?></a></div>
+                <div class = "col1"> <a href="bookdetails.php?id=<?= $row['id'] ?>"><?=$row['title'] ?></a></div>
                 <div class = "col2"> <?= $row['author'] ?></div>
                 <div class = "col3"> <?= $row['category'] ?></div>
                 <div class = "col4"> <?= $row['price'] ?></div>

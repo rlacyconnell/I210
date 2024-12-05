@@ -38,6 +38,16 @@ include ('includes/header.php');
 <br>
 <p style="text-align: center"><strong>Disclaimer</strong></p>
 <p>This application has been created as a course project for I210. It is solely for teaching and learning purposes. As a course project, the goal is to learn how to do things, but not to get things done. Therefore, the code used in this project may not be most efficient or most effective. Furthermore, the code has not been tested in any production environment. If you want to use any code in this project in any production environment, use it at your own risk.</p>
+<p>Select a Backround Color</p>
+
+<form action="index.php" method="get">
+    <input type="radio" name="bgcolor" value=""> Default
+    <input type="radio" name="bgcolor" value="green"> Green
+    <input type="radio" name="bgcolor" value="black"> Black
+    <input type="radio" name="bgcolor" value="orange"> Orange
+    <input type="radio" name="bgcolor" value="yellow"> Yellow
+    <input type="submit" value="Submit">
+</form>
 
 <?php
 include ('includes/footer.php');
